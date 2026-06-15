@@ -56,7 +56,7 @@ ssh -i /path/to/your/labsuser.pem ubuntu@YOUR-EC2-PUBLIC-IP
 - Make sure to replace `YOUR-EC2-PUBLIC-IP` with the public IP address of your EC2 instance.
 - You can find the public IP address of your EC2 instance in the AWS Management Console under the "Instances" section.
 
-Your final command for this step should look like below
+**Your final command for this step should look like below**
 
 ```
 ssh -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" ubuntu@11.11.11.11
@@ -82,7 +82,7 @@ scp -i /path/to/your/labsuser.pem -r /local/computer/website/folder/ ubuntu@YOUR
 - `:` is a symbol to separate the server IP address from the target directory on the server. It's a must.
 - The `~/` symbol specifies the target directory on server your like to copy your files/folders to. Since `ubuntu` user can only write to its home directory, you can specify the destination as `:/~`. Later we will need to further move the website files/folders to the web server's root directory.
 
-Your final command for this step should look like below
+**Your final command for this step should look like below**
 
 ```
 scp -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" -r "C:\Users\xxxxxxxx\Downloads\mywebsite\*" ubuntu@11.11.11.11:~/
@@ -106,7 +106,7 @@ sudo cp -r ~/your-website-folder/* /var/www/html/
 - `~/your-website-folder/*` specifies the source files/folders you want to copy. where `~` represents the home directory of the current user and `*` means ALL files/folders within the `your-website-folder` will be copied.
 - `/var/www/html/` specifies the destination directory on the EC2 instance where the web server serves files from.
 
-Your final command for this step should look like below
+**Your final command for this step should look like below**
 
 ```
 sudo cp -r ~/mywebsite/* /var/www/html/

@@ -56,6 +56,12 @@ ssh -i /path/to/your/labsuser.pem ubuntu@YOUR-EC2-PUBLIC-IP
 - Make sure to replace `YOUR-EC2-PUBLIC-IP` with the public IP address of your EC2 instance.
 - You can find the public IP address of your EC2 instance in the AWS Management Console under the "Instances" section.
 
+Your final command for this step should look like below
+
+```
+ssh -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" ubuntu@11.11.11.11
+```
+
 # Using SCP Command to Upload Files/Folder to Your EC2 Instance
 
 `scp` (Secure Copy) is a command-line utility that allows you to securely transfer files and directories between your local machine and a remote server, such as your EC2 instance. You can use the `scp` command to upload files or folders from your local computer to your EC2 instance.
@@ -76,6 +82,12 @@ scp -i /path/to/your/labsuser.pem -r /local/computer/website/folder/ ubuntu@YOUR
 - `:` is a symbol to separate the server IP address from the target directory on the server. It's a must.
 - The `~/` symbol specifies the target directory on server your like to copy your files/folders to. Since `ubuntu` user can only write to its home directory, you can specify the destination as `:/~`. Later we will need to further move the website files/folders to the web server's root directory.
 
+Your final command for this step should look like below
+
+```
+scp -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" -r "C:\Users\xxxxxxxx\Downloads\mywebsite\*" ubuntu@11.11.11.11:~/
+```
+
 # Copy Files & Folders to Web Server's Root Directory
 
 After you have uploaded your website files/folders to your EC2 instance, you need to move or copy them to the web server's root directory so that they can be accessed by web browsers. The web server's root directory is typically located at `/var/www/html` for Ubuntu/nginx installation.
@@ -93,3 +105,9 @@ sudo cp -r ~/your-website-folder/* /var/www/html/
 - The `-r` option is used to copy directories recursively so that files and sub-folders within the specified folder will also be copied.
 - `~/your-website-folder/*` specifies the source files/folders you want to copy. where `~` represents the home directory of the current user and `*` means ALL files/folders within the `your-website-folder` will be copied.
 - `/var/www/html/` specifies the destination directory on the EC2 instance where the web server serves files from.
+
+Your final command for this step should look like below
+
+```
+sudo cp -r ~/mywebsite/* /var/www/html/
+```

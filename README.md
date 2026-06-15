@@ -6,7 +6,7 @@ This short tutorial will guide you through the process of hosting a simple websi
 
 # Choose Ubuntu image when you create your EC2 instance.
 
-When you create your EC2 instance, make sure to select an Ubuntu image as the commands included in this tutorial are specific to Ubuntu. Amazon Linux and other Linux distributions may have different package managers and commands.
+When you create your EC2 instance, make sure you select an Ubuntu image as the commands included in this tutorial are specific to Ubuntu. Amazon Linux and other Linux distributions may have different package managers and commands.
 
 In Ubuntu server, you can use the following command to install nginx web server:
 
@@ -21,9 +21,8 @@ The following steps only applied to AWS Academy lab. If you are using a producti
 
 In AWS Academy lab or sandbox starting page, do the following steps.
 
-![](./images/aws-academy-lab-starting-page.png)
-
-1. Click **Start Lab** button to start your lab/ environment.
+1. Click **Start Lab** button to start your lab/sandbox environment.
+   ![](./images/aws-academy-lab-starting-page.png)
 1. After lab/sandbox successfully loaded, click **Details** and click **Show** button to view you AWS lab environment details. You should see details page like below.
    ![](./images/aws-lab-show-details.png)
 1. In the above details page, click **Download PEM** button to download your SSH private key. You will need this private key to connect to your EC2 instance using SSH. The downloaded file will go to your download folder and the file name will be **labsuser.pem**.
@@ -50,11 +49,13 @@ Open **Terminal** app (on Mac) or **PowerShell** (on Windows) and use the follow
 ssh -i /path/to/your/labsuser.pem ubuntu@YOUR-EC2-PUBLIC-IP
 ```
 
+- `ssh` is the command to start an SSH connection.
+- `-i` option is used to specify the path to your SSH private key file, which is required for authentication when connecting to your EC2 instance.
 - Make sure to replace `/path/to/your/labsuser.pem` with the actual path to your downloaded private key file.
 - The `ubuntu` in the command is the default username for Ubuntu EC2 instances. If you are using a different Linux distribution, the default username may be different (e.g., `ec2-user` for Amazon Linux).
 - `@` is a symbol to separate the login username from the server IP address. It's a must.
 - Make sure to replace `YOUR-EC2-PUBLIC-IP` with the public IP address of your EC2 instance.
-- You can find the public IP address of your EC2 instance in the AWS Management Console under the "Instances" section.
+- You can find the public IP address of your EC2 instance in the AWS Management Console.
 
 **Your final command for this step should look like below**
 
@@ -65,6 +66,7 @@ ssh -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" ubuntu@11.11.11.11
 # Using SCP Command to Upload Files/Folder to Your EC2 Instance
 
 `scp` (Secure Copy) is a command-line utility that allows you to securely transfer files and directories between your local machine and a remote server, such as your EC2 instance. You can use the `scp` command to upload files or folders from your local computer to your EC2 instance.
+
 To upload a file to your EC2 instance, use the following command:
 
 **Note:** This step is done in your Windows PowerShell locally, NOT on the Ubuntu prompt.
@@ -73,6 +75,8 @@ To upload a file to your EC2 instance, use the following command:
 scp -i /path/to/your/labsuser.pem -r /local/computer/website/folder/ ubuntu@YOUR-EC2-PUBLIC-IP:~/
 ```
 
+- `scp` is the command to start a secure copy operation.
+- `-i` option is used to specify the path to your SSH private key file,
 - `/path/to/your/labsuser.pem` is the path to your SSH private key file.
 - `-r` option is used to copy directories recursively. If you are uploading a single file, you can omit this option.
 - `/local/computer/website/folder/` is the path to the folder containing your website files/sub-folders on your local machine.
@@ -80,12 +84,12 @@ scp -i /path/to/your/labsuser.pem -r /local/computer/website/folder/ ubuntu@YOUR
 - `@` is a symbol to separate the login username from the server IP address. It's a must.
 - `YOUR-EC2-PUBLIC-IP` specifies the destination on your EC2 instance where you want to upload the files.
 - `:` is a symbol to separate the server IP address from the target directory on the server. It's a must.
-- The `~/` symbol specifies the target directory on server your like to copy your files/folders to. Since `ubuntu` user can only write to its home directory, you can specify the destination as `:/~`. Later we will need to further move the website files/folders to the web server's root directory.
+- The `~/` symbol specifies the target directory on server your like to copy your files/folders to. Since `ubuntu` user can only write to its home directory, you can specify the destination as `~/`. Later we will need to further move the website files/folders to the web server's root directory.
 
 **Your final command for this step should look like below**
 
 ```
-scp -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" -r "C:\Users\xxxxxxxx\Downloads\mywebsite\*" ubuntu@11.11.11.11:~/
+scp -i "C:\Users\xxxxxxxx\Downloads\labsuser.pem" -r "C:\Users\xxxxxxxx\Downloads\mywebsite\" ubuntu@11.11.11.11:~/mywebsite
 ```
 
 # Copy Files & Folders to Web Server's Root Directory
